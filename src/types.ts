@@ -1,73 +1,72 @@
-export interface Lesson {
+export interface Transaction {
   id: string;
-  title: string;
-  duration: string;
-  completed: boolean;
-  content?: string;
-  quiz?: QuizQuestion[];
+  name: string;
+  date: string; // e.g. "Aujourd'hui", "Hier", "01 juillet"
+  time: string; // e.g. "14:28", "09:15"
+  amount: number; // positive for credits, negative for debits
+  category: string; // "Alimentation", "Shopping", "Loisirs", "Logement", "Services", "Revenus", "Voyage", "Transport"
+  categoryIcon: string; // Lucide icon name
+  status: "Paiement validé" | "Paiement CB" | "Abonnement" | "Crédit" | "Facture" | "Transport" | "Voyage" | "Musique" | "Paiement" | "Virement entrant" | "Prélèvement" | "Électricité" | "Télévision" | "Stockage" | "En attente" | "Carburant" | "Achat" | "Sport";
+  reference: string;
+  paymentMethod: string;
+  location: string;
+  notes: string;
 }
 
-export interface QuizQuestion {
-  question: string;
-  options: string[];
-  correctAnswerIndex: number;
+export interface Payee {
+  id: string;
+  name: string;
+  iban: string;
+  bank: string;
+  email: string;
+  phone: string;
 }
 
-export interface Course {
+export interface TransferHistory {
+  id: string;
+  payeeName: string;
+  amount: number;
+  type: "Envoyé" | "Reçu" | "Programmé";
+  date: string;
+  note?: string;
+}
+
+export interface CreditCard {
+  id: string;
+  type: "Premium" | "Virtuelle" | "Standard";
+  number: string;
+  expiry: string;
+  cvv: string;
+  holder: string;
+  iban: string;
+  bic: string;
+  blocked: boolean;
+  plafondWeekly: number; // Maximum threshold e.g. 5000
+  plafondSpent: number; // Current spent this week e.g. 1200
+  pinCode: string;
+  internationalEnabled: boolean;
+  contactlessEnabled: boolean;
+  colorTheme: "blue" | "dark" | "gold" | "rose" | "purple";
+  customName?: string;
+}
+
+export interface BankNotification {
   id: string;
   title: string;
-  category: string;
-  categoryColor: string;
-  duration: string;
-  image: string;
-  instructor: string;
-  rating: number;
-  progress: number; // 0 to 100
-  enrolled: boolean;
-  level: string;
   description: string;
-  lessons: Lesson[];
-  price: number; // to demonstrate CPF balance deduction when enrolling!
-}
-
-export interface Activity {
-  id: string;
-  title: string;
-  timestamp: string;
-  type: 'course_start' | 'course_progress' | 'course_complete' | 'credit_added' | 'credit_spent' | 'certificate';
-  description: string;
-  value?: string;
+  timestamp: string; // e.g. "Aujourd'hui, 10:45"
+  unread: boolean;
+  type: "info" | "success" | "warning";
 }
 
 export interface UserProfile {
   name: string;
   accountNumber: string;
+  iban: string;
+  bic: string;
   balance: number;
   avatar: string;
-  rank: string;
-  xp: number;
-  nextRankXp: number;
-}
-
-export interface Exercise {
-  id: string;
-  title: string;
-  subject: string;
-  difficulty: 'Facile' | 'Moyen' | 'Difficile';
-  xpReward: number;
-  questionsCount: number;
-  completed: boolean;
-  category: string;
-}
-
-export interface Message {
-  id: string;
-  sender: {
-    name: string;
-    avatar: string;
-    role: string;
-  };
-  content: string;
-  timestamp: string;
-  unread: boolean;
+  email: string;
+  phone: string;
+  tier: string;
 }

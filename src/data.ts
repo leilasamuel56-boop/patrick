@@ -1,375 +1,423 @@
-import { Course, Activity, UserProfile, Exercise, Message } from './types';
+import { Transaction, Payee, TransferHistory, CreditCard, BankNotification, UserProfile } from './types';
 
 export const initialUserProfile: UserProfile = {
   name: 'Gérad Lopez',
   accountNumber: 'EDU-4587-9231-001',
+  iban: 'FR76 3000 4000 5500 0000 1234 567',
+  bic: 'BNPAFRPPXXX',
   balance: 38000,
-  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200&h=200', // Premium studio shot
-  rank: 'Executive Apprenant',
-  xp: 4250,
-  nextRankXp: 5000,
+  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200&h=200',
+  email: 'gerad.lopez@premium-edu.fr',
+  phone: '+33 6 12 34 56 78',
+  tier: 'Compte Premium'
 };
 
-export const initialCourses: Course[] = [
+export const initialTransactions: Transaction[] = [
   {
-    id: 'course-1',
-    title: 'Management Stratégique & Leadership d\'Élite',
-    category: 'Business & Management',
-    categoryColor: 'bg-blue-50 text-blue-600 border border-blue-100',
-    duration: '24 heures',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600&h=400',
-    instructor: 'Prof. Laurent Clavel',
-    rating: 4.9,
-    progress: 75, // For "Continuer l'apprentissage"
-    enrolled: true,
-    level: 'Avancé',
-    price: 3400,
-    description: 'Devenez un leader capable de piloter le changement organisationnel à haute échelle, de motiver des équipes multidisciplinaires et d\'exécuter des stratégies d\'innovation disruptives.',
-    lessons: [
-      {
-        id: 'c1-l1',
-        title: 'Fondations de l\'autorité inspirante',
-        duration: '45 min',
-        completed: true,
-        content: 'Le leadership d\'élite ne réside pas dans le contrôle, mais dans l\'alignement de la vision. Un leader inspirant communique le "Pourquoi" avant de détailler le "Comment".',
-        quiz: [
-          {
-            question: "Quel est le principe fondamental du Golden Circle de Simon Sinek ?",
-            options: [
-              "Commencer par le Comment (How)",
-              "Commencer par le Pourquoi (Why)",
-              "Commencer par le Quoi (What)",
-              "Se concentrer sur le profit à court terme"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      },
-      {
-        id: 'c1-l2',
-        title: 'Communication en situation de crise',
-        duration: '1h 15m',
-        completed: true,
-        content: 'Lors d\'une crise, l\'incertitude engendre la panique. La règle d\'or est d\'agir avec transparence absolue, d\'admettre les limites et de définir des étapes itératives claires.',
-        quiz: [
-          {
-            question: "Quelle est la première action recommandée lors d'une crise managériale ?",
-            options: [
-              "Dissimuler les faits jusqu'à résolution",
-              "Prendre la parole rapidement avec transparence",
-              "Déléguer la communication aux subordonnés",
-              "Attendre l'avis des actionnaires externes"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      },
-      {
-        id: 'c1-l3',
-        title: 'Négociation à hauts enjeux et arbitrage',
-        duration: '2h 00m',
-        completed: true,
-        content: 'La négociation n\'est pas un jeu à somme nulle. La méthode Harvard préconise de se concentrer sur les intérêts sous-jacents plutôt que sur les positions affichées.',
-        quiz: [
-          {
-            question: "Que préconise l'approche de négociation raisonnée de Harvard ?",
-            options: [
-              "Forcer l'adversaire à capituler",
-              "Se concentrer sur les intérêts réels plutôt que les positions rigides",
-              "Faire des concessions continues et sans contrepartie",
-              "Ignorer les critères objectifs"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      },
-      {
-        id: 'c1-l4',
-        title: 'Gouvernance Agile et prise de décision',
-        duration: '1h 30m',
-        completed: false,
-        content: 'La gouvernance moderne s\'appuie sur la sociocratie et l\'intelligence collective. Apprenez à distribuer le pouvoir de décision au niveau le plus proche du terrain.',
-        quiz: [
-          {
-            question: "Quel outil favorise la prise de décision distribuée en gouvernance agile ?",
-            options: [
-              "Le vote majoritaire imposé",
-              "Le consentement par objections raisonnables",
-              "La dictature bienveillante",
-              "Le consensus absolu systématique"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      },
-      {
-        id: 'c1-l5',
-        title: 'Pilotage de la Performance & OKRs d\'Équipe',
-        duration: '1h 50m',
-        completed: false,
-        content: 'Les OKRs (Objectives and Key Results) s\'alignent sur les aspirations stratégiques globales. Ils doivent être ambitieux, mesurables et décorrélés de la rémunération directe.',
-        quiz: [
-          {
-            question: "Un bon Key Result (KR) doit être...",
-            options: [
-              "Subjectif et long terme",
-              "Chiffré, mesurable et orienté impact",
-              "Une simple liste de tâches opérationnelles",
-              "Fixé uniquement par le comité de direction"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      }
-    ]
+    id: 'tx-1',
+    name: 'Carrefour Market',
+    date: 'Aujourd\'hui',
+    time: '12:45',
+    amount: -84.30,
+    category: 'Alimentation',
+    categoryIcon: 'ShoppingBag',
+    status: 'Paiement validé',
+    reference: 'REF-TX-84931-CARREFOUR',
+    paymentMethod: 'Carte Premium •••• 9021',
+    location: 'Paris, France',
+    notes: 'Courses de la semaine'
   },
   {
-    id: 'course-2',
-    title: 'Intelligence Artificielle Générative pour Décideurs',
-    category: 'Technologie & IA',
-    categoryColor: 'bg-indigo-50 text-indigo-600 border border-indigo-100',
-    duration: '18 heures',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&q=80&w=600&h=400',
-    instructor: 'Dr. Sarah Kaddour',
-    rating: 4.8,
-    progress: 0,
-    enrolled: false,
-    level: 'Intermédiaire',
-    price: 4800,
-    description: 'Maîtrisez les concepts fondamentaux des modèles LLM et de diffusion pour optimiser la productivité de votre entreprise et inventer de nouveaux workflows opérationnels.',
-    lessons: [
-      {
-        id: 'c2-l1',
-        title: 'Introduction aux Transformers et LLM',
-        duration: '1h 10m',
-        completed: false,
-        content: 'Les architectures de type Transformer reposent sur les mécanismes de self-attention, permettant de capturer les relations sémantiques lointaines dans un texte.',
-        quiz: [
-          {
-            question: "Quel mécanisme clé a révolutionné le traitement du langage naturel en 2017 ?",
-            options: [
-              "Les réseaux de neurones récurrents simples",
-              "Le mécanisme d'Attention (Self-Attention)",
-              "Le filtrage collaboratif bayésien",
-              "Le lissage de Laplace"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      },
-      {
-        id: 'c2-l2',
-        title: 'Prompt Engineering Avancé',
-        duration: '1h 45m',
-        completed: false,
-        content: 'Le prompt engineering utilise des stratégies comme le Few-Shot prompting ou le Chain-of-Thought pour contraindre et structurer le raisonnement du modèle.',
-        quiz: [
-          {
-            question: "Qu'est-ce que le Chain-of-Thought Prompting ?",
-            options: [
-              "Une suite de prompts aléatoires",
-              "Une technique incitant le modèle à décomposer son raisonnement étape par étape",
-              "Un protocole de sécurité contre les injections",
-              "Un algorithme d'entraînement de poids"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      },
-      {
-        id: 'c2-l3',
-        title: 'Éthique, Sécurité et RGPD de l\'IA',
-        duration: '2h 15m',
-        completed: false,
-        content: 'Le déploiement d\'IA en Europe exige le respect absolu de la protection des données. Évitez d\'envoyer des données nominatives ou confidentielles aux APIs publiques.',
-        quiz: [
-          {
-            question: "Comment sécuriser l'usage d'un LLM tiers en entreprise ?",
-            options: [
-              "Autoriser tout le personnel à envoyer les bases clients",
-              "Utiliser des passerelles d'anonymisation et des contrats de protection",
-              "Ignorer les contraintes réglementaires",
-              "Bloquer entièrement l'accès à internet"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      }
-    ]
+    id: 'tx-2',
+    name: 'Amazon Europe',
+    date: 'Aujourd\'hui',
+    time: '10:14',
+    amount: -129.99,
+    category: 'Shopping',
+    categoryIcon: 'ShoppingBag',
+    status: 'Paiement CB',
+    reference: 'REF-TX-22104-AMZN',
+    paymentMethod: 'Carte Premium •••• 9021',
+    location: 'Internet (Luxembourg)',
+    notes: 'Écran de bureau USB-C'
   },
   {
-    id: 'course-3',
-    title: 'Finance Quantitative & Gestion d\'Actifs',
-    category: 'Finance',
-    categoryColor: 'bg-emerald-50 text-emerald-600 border border-emerald-100',
-    duration: '32 heures',
-    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&q=80&w=600&h=400',
-    instructor: 'Marc-Antoine Sarda',
-    rating: 4.9,
-    progress: 0,
-    enrolled: false,
-    level: 'Expert',
-    price: 5200,
-    description: 'Une formation mathématique et pratique de haut niveau sur la gestion de portefeuille, la modélisation de risques et l\'implémentation d\'algorithmes financiers.',
-    lessons: [
-      {
-        id: 'c3-l1',
-        title: 'Théorie moderne du portefeuille de Markowitz',
-        duration: '2h 15m',
-        completed: false,
-        content: 'La diversification permet de réduire le risque global du portefeuille sans nécessairement sacrifier son rendement espéré, en exploitant la covariance des actifs.',
-        quiz: [
-          {
-            question: "Selon Markowitz, comment définit-on la frontière efficiente ?",
-            options: [
-              "L'ensemble des portefeuilles maximisant le rendement pour un niveau de risque donné",
-              "L'arbitrage d'un seul actif hautement spéculatif",
-              "Le portefeuille composé uniquement d'obligations d'État",
-              "Une courbe mathématique sans application pratique"
-            ],
-            correctAnswerIndex: 0
-          }
-        ]
-      }
-    ]
+    id: 'tx-3',
+    name: 'Netflix',
+    date: 'Hier',
+    time: '04:12',
+    amount: -15.99,
+    category: 'Loisirs',
+    categoryIcon: 'Tv',
+    status: 'Abonnement',
+    reference: 'REF-TX-44810-NTFLX',
+    paymentMethod: 'Prélèvement automatique',
+    location: 'Internet (USA)',
+    notes: 'Abonnement mensuel Ultra HD'
   },
   {
-    id: 'course-4',
-    title: 'Design d\'Expérience & Neuro-Ergonomie',
-    category: 'Design & UX',
-    categoryColor: 'bg-amber-50 text-amber-600 border border-amber-100',
-    duration: '15 heures',
-    image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=600&h=400',
-    instructor: 'Aline Mercier',
-    rating: 4.7,
-    progress: 0,
-    enrolled: false,
-    level: 'Débutant',
-    price: 2900,
-    description: 'Appliquez les neurosciences cognitives à la conception de vos interfaces digitales pour maximiser l\'engagement des utilisateurs de manière éthique et inclusive.',
-    lessons: [
-      {
-        id: 'c4-l1',
-        title: 'Loi de Fitts et Loi de Hick',
-        duration: '1h 05m',
-        completed: false,
-        content: 'La Loi de Hick stipule que le temps de prise de décision augmente de manière logarithmique avec le nombre d\'options proposées.',
-        quiz: [
-          {
-            question: "Quelle recommandation découle directement de la Loi de Hick ?",
-            options: [
-              "Augmenter le nombre d'options dans le menu principal",
-              "Simplifier les choix et catégoriser l'information pour l'utilisateur",
-              "Rendre les boutons de clic minuscules",
-              "Utiliser des animations agressives"
-            ],
-            correctAnswerIndex: 1
-          }
-        ]
-      }
-    ]
+    id: 'tx-4',
+    name: 'Salaire',
+    date: '01 juillet',
+    time: '08:00',
+    amount: 4500.00,
+    category: 'Revenus',
+    categoryIcon: 'DollarSign',
+    status: 'Crédit',
+    reference: 'REF-TX-00921-SALAIRE',
+    paymentMethod: 'Virement SEPA',
+    location: 'Paris, France',
+    notes: 'Rémunération mensuelle brute'
+  },
+  {
+    id: 'tx-5',
+    name: 'Orange',
+    date: '29 juin',
+    time: '09:30',
+    amount: -42.99,
+    category: 'Services',
+    categoryIcon: 'Wifi',
+    status: 'Facture',
+    reference: 'REF-TX-99824-ORANGE',
+    paymentMethod: 'Prélèvement automatique',
+    location: 'Paris, France',
+    notes: 'Forfait mobile & fibre 5G'
+  },
+  {
+    id: 'tx-6',
+    name: 'Uber',
+    date: '28 juin',
+    time: '23:15',
+    amount: -18.40,
+    category: 'Transport',
+    categoryIcon: 'Car',
+    status: 'Transport',
+    reference: 'REF-TX-33412-UBER',
+    paymentMethod: 'Apple Pay',
+    location: 'Lyon, France',
+    notes: 'Course retour soirée'
+  },
+  {
+    id: 'tx-7',
+    name: 'Air France',
+    date: '26 juin',
+    time: '14:20',
+    amount: -685.00,
+    category: 'Voyage',
+    categoryIcon: 'Plane',
+    status: 'Voyage',
+    reference: 'REF-TX-77821-AFR',
+    paymentMethod: 'Carte Premium •••• 9021',
+    location: 'Paris-CDG, France',
+    notes: 'Vol Aller-Retour Paris-Nice premium'
+  },
+  {
+    id: 'tx-8',
+    name: 'Apple',
+    date: '25 juin',
+    time: '11:10',
+    amount: -2.99,
+    category: 'Services',
+    categoryIcon: 'Cloud',
+    status: 'Stockage',
+    reference: 'REF-TX-88214-APPLE',
+    paymentMethod: 'Apple Pay',
+    location: 'Cupertino, USA',
+    notes: 'Abonnement iCloud+ 200 Go'
+  },
+  {
+    id: 'tx-9',
+    name: 'Spotify',
+    date: '24 juin',
+    time: '05:30',
+    amount: -10.99,
+    category: 'Loisirs',
+    categoryIcon: 'Music',
+    status: 'Musique',
+    reference: 'REF-TX-11204-SPTFY',
+    paymentMethod: 'Prélèvement automatique',
+    location: 'Stockholm, Suède',
+    notes: 'Abonnement Premium Individuel'
+  },
+  {
+    id: 'tx-10',
+    name: 'Restaurant Le Gourmet',
+    date: '22 juin',
+    time: '20:45',
+    amount: -83.00,
+    category: 'Alimentation',
+    categoryIcon: 'Coffee',
+    status: 'Paiement',
+    reference: 'REF-TX-55410-REST',
+    paymentMethod: 'Carte Premium •••• 9021',
+    location: 'Bordeaux, France',
+    notes: 'Dîner d\'affaires gastronomique'
+  },
+  {
+    id: 'tx-11',
+    name: 'Remboursement Assurance',
+    date: '20 juin',
+    time: '15:22',
+    amount: 275.00,
+    category: 'Revenus',
+    categoryIcon: 'ShieldCheck',
+    status: 'Crédit',
+    reference: 'REF-TX-22109-ASSUR',
+    paymentMethod: 'Virement SEPA',
+    location: 'Nantes, France',
+    notes: 'Remboursement sinistre bris de glace'
+  },
+  {
+    id: 'tx-12',
+    name: 'TotalEnergies',
+    date: '18 juin',
+    time: '17:40',
+    amount: -72.00,
+    category: 'Transport',
+    categoryIcon: 'Gauge',
+    status: 'Carburant',
+    reference: 'REF-TX-44510-TOTAL',
+    paymentMethod: 'Carte Premium •••• 9021',
+    location: 'Marseille, France',
+    notes: 'Plein de sans-plomb 98'
+  },
+  {
+    id: 'tx-13',
+    name: 'Fnac',
+    date: '17 juin',
+    time: '16:15',
+    amount: -219.00,
+    category: 'Shopping',
+    categoryIcon: 'Smartphone',
+    status: 'Achat',
+    reference: 'REF-TX-11824-FNAC',
+    paymentMethod: 'Carte Premium •••• 9021',
+    location: 'Paris, France',
+    notes: 'Casque audio réducteur de bruit'
+  },
+  {
+    id: 'tx-14',
+    name: 'Décathlon',
+    date: '15 juin',
+    time: '14:02',
+    amount: -146.00,
+    category: 'Loisirs',
+    categoryIcon: 'Activity',
+    status: 'Sport',
+    reference: 'REF-TX-33821-DECAT',
+    paymentMethod: 'Carte Premium •••• 9021',
+    location: 'Nice, France',
+    notes: 'Vêtements techniques running'
+  },
+  {
+    id: 'tx-15',
+    name: 'Paiement reçu',
+    date: '13 juin',
+    time: '10:30',
+    amount: 800.00,
+    category: 'Revenus',
+    categoryIcon: 'User',
+    status: 'Virement entrant',
+    reference: 'REF-TX-00938-PAYRECD',
+    paymentMethod: 'Virement SEPA',
+    location: 'Toulouse, France',
+    notes: 'Remboursement frais week-end'
+  },
+  {
+    id: 'tx-16',
+    name: 'Loyer',
+    date: '10 juin',
+    time: '02:00',
+    amount: -950.00,
+    category: 'Logement',
+    categoryIcon: 'Home',
+    status: 'Prélèvement',
+    reference: 'REF-TX-66512-LOYER',
+    paymentMethod: 'Prélèvement automatique',
+    location: 'Paris, France',
+    notes: 'Échéance mensuelle loyer studio'
+  },
+  {
+    id: 'tx-17',
+    name: 'EDF',
+    date: '09 juin',
+    time: '08:30',
+    amount: -136.00,
+    category: 'Logement',
+    categoryIcon: 'Zap',
+    status: 'Électricité',
+    reference: 'REF-TX-22415-EDF',
+    paymentMethod: 'Prélèvement automatique',
+    location: 'Lyon, France',
+    notes: 'Facturation bimestrielle électricité'
+  },
+  {
+    id: 'tx-18',
+    name: 'Canal+',
+    date: '08 juin',
+    time: '12:00',
+    amount: -29.00,
+    category: 'Loisirs',
+    categoryIcon: 'Tv',
+    status: 'Télévision',
+    reference: 'REF-TX-99823-CANAL',
+    paymentMethod: 'Prélèvement automatique',
+    location: 'Internet (France)',
+    notes: 'Abonnement Canal+ Sport'
+  },
+  {
+    id: 'tx-19',
+    name: 'Google One',
+    date: '06 juin',
+    time: '09:00',
+    amount: -1.99,
+    category: 'Services',
+    categoryIcon: 'HardDrive',
+    status: 'Stockage',
+    reference: 'REF-TX-11234-G1',
+    paymentMethod: 'Apple Pay',
+    location: 'Mountain View, USA',
+    notes: 'Abonnement Google One 100 Go'
   }
 ];
 
-export const initialActivities: Activity[] = [
+export const initialPayees: Payee[] = [
   {
-    id: 'act-1',
-    title: 'Validation de module',
-    timestamp: 'Aujourd\'hui, 10:45',
-    type: 'course_progress',
-    description: 'Vous avez complété la leçon « Négociation à hauts enjeux » avec un score parfait de 100%.',
-    value: '+150 XP'
+    id: 'py-1',
+    name: 'Marie Dubois',
+    iban: 'FR76 1002 4009 1100 2234 5678 901',
+    bank: 'Société Générale',
+    email: 'marie.dubois@gmail.com',
+    phone: '+33 6 88 12 34 56'
   },
   {
-    id: 'act-2',
-    title: 'Certification Émise',
-    timestamp: 'Hier, 16:30',
-    type: 'certificate',
-    description: 'Votre certificat officiel en « Leadership Distribué & Conduite du Changement » est disponible.',
-    value: 'Voir'
+    id: 'py-2',
+    name: 'Thomas Bernard',
+    iban: 'FR76 3004 5500 2200 9988 1122 334',
+    bank: 'BNP Paribas',
+    email: 'thomas.bernard@outlook.com',
+    phone: '+33 6 55 98 76 54'
   },
   {
-    id: 'act-3',
-    title: 'Incrémentation Budget Formation',
-    timestamp: 'Il y a 3 jours',
-    type: 'credit_added',
-    description: 'Crédit annuel d\'État CPF versé avec succès sur votre espace personnel d\'apprentissage.',
-    value: '+2 500 €'
+    id: 'py-3',
+    name: 'Paul Martin',
+    iban: 'FR76 2000 3300 4400 5500 6677 889',
+    bank: 'Crédit Agricole',
+    email: 'paul.martin@yahoo.fr',
+    phone: '+33 6 44 22 11 00'
   },
   {
-    id: 'act-4',
-    title: 'Inscription au cours',
-    timestamp: 'Il y a 1 semaine',
-    type: 'course_start',
-    description: 'Vous vous êtes inscrit au cursus « Management Stratégique & Leadership d\'Élite ».',
-    value: '-3 400 €'
+    id: 'py-4',
+    name: 'Julie Robert',
+    iban: 'FR76 1122 3344 5566 7788 9900 112',
+    bank: 'LCL',
+    email: 'julie.robert@laposte.net',
+    phone: '+33 6 12 90 78 56'
+  },
+  {
+    id: 'py-5',
+    name: 'Entreprise ABC',
+    iban: 'FR76 3000 1000 2000 3000 4000 500',
+    bank: 'CIC',
+    email: 'billing@enterprise-abc.com',
+    phone: '+33 1 40 50 60 70'
   }
 ];
 
-export const initialExercises: Exercise[] = [
+export const initialTransferHistory: TransferHistory[] = [
   {
-    id: 'ex-1',
-    title: 'Cas Pratique : Arbitrage & Résolution de Crise',
-    category: 'Management',
-    subject: 'Gouvernance',
-    difficulty: 'Difficile',
-    xpReward: 300,
-    questionsCount: 4,
-    completed: false,
+    id: 'tf-1',
+    payeeName: 'Marie Dubois',
+    amount: 350.00,
+    type: 'Envoyé',
+    date: '05 juillet 2026',
+    note: 'Cadeau anniversaire'
   },
   {
-    id: 'ex-2',
-    title: 'Optimisation de Prompts d\'Entreprise',
-    category: 'Technologie',
-    subject: 'IA Générative',
-    difficulty: 'Moyen',
-    xpReward: 150,
-    questionsCount: 3,
-    completed: false,
+    id: 'tf-2',
+    payeeName: 'Thomas Bernard',
+    amount: 120.00,
+    type: 'Reçu',
+    date: '03 juillet 2026',
+    note: 'Remboursement resto'
   },
   {
-    id: 'ex-3',
-    title: 'Validation des Formules de Diversification',
-    category: 'Finance',
-    subject: 'Markowitz & Risques',
-    difficulty: 'Difficile',
-    xpReward: 400,
-    questionsCount: 5,
-    completed: false,
+    id: 'tf-3',
+    payeeName: 'Paul Martin',
+    amount: 1200.00,
+    type: 'Envoyé',
+    date: '30 juin 2026',
+    note: 'Achat vélo électrique'
   },
   {
-    id: 'ex-4',
-    title: 'Quiz Fondamentaux Loi de Hick & Fitts',
-    category: 'Design & UX',
-    subject: 'Neuro-ergonomie',
-    difficulty: 'Facile',
-    xpReward: 100,
-    questionsCount: 2,
-    completed: true,
+    id: 'tf-4',
+    payeeName: 'Julie Robert',
+    amount: 500.00,
+    type: 'Programmé',
+    date: '15 juillet 2026',
+    note: 'Épargne projet été'
+  },
+  {
+    id: 'tf-5',
+    payeeName: 'Entreprise ABC',
+    amount: 4500.00,
+    type: 'Reçu',
+    date: '01 juillet 2026',
+    note: 'Acompte prestations conseil'
   }
 ];
 
-export const initialMessages: Message[] = [
+export const initialCards: CreditCard[] = [
   {
-    id: 'msg-1',
-    sender: {
-      name: 'Sarah Kaddour',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150',
-      role: 'Professeure de Data Science'
-    },
-    content: 'Bonjour Gérad, j\'ai passé en revue vos dernières propositions de prompt pour le service marketing. C\'est remarquable. Je vous conseille de tester la technique de Chain-of-Thought sur la question du budget.',
-    timestamp: 'Aujourd\'hui, 09:15',
-    unread: true,
-  },
+    id: 'card-1',
+    type: 'Premium',
+    number: '4587 9021 5564 1234',
+    expiry: '12/29',
+    cvv: '883',
+    holder: 'Gérad Lopez',
+    iban: 'FR76 3000 4000 5500 0000 1234 567',
+    bic: 'BNPAFRPPXXX',
+    blocked: false,
+    plafondWeekly: 5000,
+    plafondSpent: 1234.50,
+    pinCode: '1984',
+    internationalEnabled: true,
+    contactlessEnabled: true,
+    colorTheme: 'blue'
+  }
+];
+
+export const initialNotifications: BankNotification[] = [
   {
-    id: 'msg-2',
-    sender: {
-      name: 'Yannick Moreau',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150',
-      role: 'Administrateur Pédagogique'
-    },
-    content: 'Félicitations pour l\'obtention de votre dernier certificat ! Votre solde de 38 000 € est disponible pour tout autre cursus de votre choix.',
-    timestamp: 'Hier, 17:00',
+    id: 'nt-1',
+    title: 'Salaire reçu',
+    description: 'Votre salaire de 4 500,00 € a été crédité sur votre compte Premium.',
+    timestamp: '01 juillet, 08:00',
     unread: false,
+    type: 'success'
+  },
+  {
+    id: 'nt-2',
+    title: 'Paiement validé',
+    description: 'Paiement de 129,99 € validé chez Amazon Europe par Carte Premium.',
+    timestamp: 'Aujourd\'hui, 10:14',
+    unread: false,
+    type: 'success'
+  },
+  {
+    id: 'nt-3',
+    title: 'Connexion réussie',
+    description: 'Une connexion sécurisée à votre espace client a été établie depuis Paris, France.',
+    timestamp: 'Aujourd\'hui, 09:00',
+    unread: false,
+    type: 'info'
+  },
+  {
+    id: 'nt-4',
+    title: 'Nouveau bénéficiaire ajouté',
+    description: 'Le bénéficiaire Marie Dubois a été ajouté avec succès.',
+    timestamp: '05 juillet, 11:00',
+    unread: false,
+    type: 'info'
   }
 ];

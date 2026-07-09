@@ -1,6 +1,6 @@
 {
-  "name": "Espace Éducatif Premium",
-  "description": "Une interface mobile ultra-réaliste, fluide et premium représentant l'espace personnel d'une application éducative de prestige avec solde de formation et statistiques animées.",
+  "name": "Premium Banking",
+  "description": "Une application bancaire premium ultra-réaliste qui fonctionne comme une véritable banque mobile moderne avec gestion des comptes de Gérad Lopez.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
