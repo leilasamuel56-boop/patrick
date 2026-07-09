@@ -1,0 +1,6 @@
+{
+  "name": "Espace Éducatif Premium",
+  "description": "Une interface mobile ultra-réaliste, fluide et premium représentant l'espace personnel d'une application éducative de prestige avec solde de formation et statistiques animées.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
