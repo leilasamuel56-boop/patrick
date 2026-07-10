@@ -1,13 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Banking - Espace Privé Gérad Lopez</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Premium Banking - Espace Privé Gérard Lopez</title>
+
+    <!-- PWA Manifest & Colors -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- iOS / Safari App support -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Ekobanque" />
+    <link rel="apple-touch-icon" href="https://i.imgur.com/k6lP5Zf.png" />
+
+    <!-- PWA Splash screens for iOS can also reference icons -->
+    <link rel="apple-touch-startup-image" href="https://i.imgur.com/k6lP5Zf.png" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('Service Worker enregistré avec succès avec le scope: ', registration.scope);
+              
+              // Handle updates: check if there's a new service worker waiting
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('Un nouveau contenu est disponible, veuillez rafraîchir la page.');
+                  }
+                });
+              });
+            })
+            .catch((error) => {
+              console.error('Échec de l\'enregistrement du Service Worker: ', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
 
